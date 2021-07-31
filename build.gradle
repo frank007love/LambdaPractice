@@ -1,0 +1,85 @@
+apply plugin: 'java' 
+apply plugin: 'eclipse'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+compileJava {
+    options.encoding = 'UTF-8'
+    options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+}
+ 
+sourceSets {
+ 	main {
+    	java {
+      		srcDir  'src'
+    	}
+  	}
+  	test {
+    	java {
+      		srcDir  'test'
+    	}
+  	}
+  	tools {
+    	java {
+      		srcDir  'tools'
+    	}
+  	}
+}
+
+repositories {
+    mavenCentral()
+}
+
+
+
+jar {
+    baseName = 'TestProject'
+    version =  '1.0.0'
+}
+
+project.ext {
+	POWERMOCK_MOCKITO_VERSION = "1.6.6"
+	POWERMOCK_API_MOCKITO_DEP = "org.powermock:powermock-api-mockito:$POWERMOCK_MOCKITO_VERSION"
+	POWERMOCK_API_MOCKITO_COM_DEP = "org.powermock:powermock-api-mockito-common:$POWERMOCK_MOCKITO_VERSION"
+	POWERMOCK_CORE_DEP = "org.powermock:powermock-core:$POWERMOCK_MOCKITO_VERSION"
+	
+	POWERMOCK_MOCKITO2_VERSION = "1.7.4"
+	POWERMOCK_API_MOCKITO2_DEP = "org.powermock:powermock-api-mockito2:$POWERMOCK_MOCKITO2_VERSION"
+	
+	//MOCKITO_VERSION = "2.1.0"
+	
+	//MOCKITO_VERSION = "1.10.19"
+	MOCKITO_VERSION = "2.18.3"
+	MOCKITO_CORE_DEP = "org.mockito:mockito-core:$MOCKITO_VERSION"
+	
+	HAMCREST_VERSION = "1.3"
+	HAMCREST_DEP = "org.hamcrest:hamcrest-library:$HAMCREST_VERSION"
+ }
+
+dependencies {
+	compile 'log4j:log4j:1.2.16'
+    compile 'org.slf4j:slf4j-api:1.7.21'
+    compile 'com.diffplug.durian:durian:3.3.0'
+
+   	//testCompile "$POWERMOCK_API_MOCKITO_DEP"
+   	testCompile "$POWERMOCK_API_MOCKITO2_DEP"
+	testCompile group: 'org.powermock', name: 'powermock-api-mockito-common', version: '1.6.6'
+	//testCompile group: 'org.powermock', name: 'powermock-api-mockito2', version: '1.7.4'
+	testCompile "$POWERMOCK_API_MOCKITO_COM_DEP"
+	testCompile "$POWERMOCK_CORE_DEP"
+	testCompile group: 'org.powermock', name: 'powermock-reflect', version: '1.6.6'
+   	testCompile group: 'org.powermock', name: 'powermock-module-junit4', version: '1.6.6'
+   	testCompile group: 'org.powermock', name: 'powermock-module-junit4-common', version: '1.6.6'
+   	testCompile group: 'org.powermock', name: 'powermock-module-javaagent', version: '1.6.6'
+   	testCompile group: 'org.powermock', name: 'powermock-classloading-xstream', version: '1.6.6'
+   	testCompile group: 'org.powermock', name: 'powermock-classloading-objenesis', version: '1.6.6'
+   	testCompile group: 'org.powermock', name: 'powermock-module-junit4-rule', version: '1.6.6'
+   	testCompile group: 'org.powermock', name: 'powermock-module-junit4-rule-agent', version: '1.6.6'
+   	
+	testCompile "$MOCKITO_CORE_DEP"
+	testCompile "$HAMCREST_DEP"
+	
+    testCompile 'junit:junit:4.12'
+    
+    
+}
